@@ -8,8 +8,12 @@
 **VK Cloud**
 
 **Yandex Cloud**
+выбрал 2 CPU, 8Gb RAM и HDD
+<img width="662" height="618" alt="image" src="https://github.com/user-attachments/assets/baa13d6a-d559-4dd1-8ecf-0a1d83a50c94" />
 
 
+
+    
 
 ## **(2)Настроить доступ с вашего IP ##
 Проверить подключение через psql
@@ -17,6 +21,57 @@
 **VK Cloud**
 
 **Yandex Cloud**
+Нужен доступ к базе данных с management ноды otusmgt01
+
+(a) Создал группу безопасности esartisonconn
+<img width="626" height="235" alt="image" src="https://github.com/user-attachments/assets/3a218054-b78e-4b1a-bde7-73070ac20094" />
+
+
+(б) добавил правило, чтобы мог подключаться с otusmgt01
+
+Для генерации CIDR использовал сайт [IP Range To CIDR](https://www.ipaddressguide.com/cidr)
+
+(в) Добавление сертификата на локальную машину
+```
+esartison@otusmgt01:~$  wget "https://storage.yandexcloud.net/cloud-certs/CA.pem" \
+>     --output-document ~/.postgresql/root.crt && \
+> chmod 0600 ~/.postgresql/root.crt
+--2025-07-27 17:08:30--  https://storage.yandexcloud.net/cloud-certs/CA.pem
+Resolving storage.yandexcloud.net (storage.yandexcloud.net)... 213.180.193.243, 2a02:6b8::1d9
+Connecting to storage.yandexcloud.net (storage.yandexcloud.net)|213.180.193.243|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 3579 (3.5K) [application/x-x509-ca-cert]
+Saving to: ‘/home/esartison/.postgresql/root.crt’
+
+/home/esartison/.postgresql/root.crt                        100%[========================================================================================================================================>]   3.50K  --.-KB/s    in 0s
+
+2025-07-27 17:08:30 (1.06 GB/s) - ‘/home/esartison/.postgresql/root.crt’ saved [3579/3579]
+```
+
+(д) проверка подключения
+```
+esartison@otusmgt01:~$ psql "host=rc1a-i97ee0q54nlm3sj0.mdb.yandexcloud.net,rc1d-605o1bcrlkt8sopi.mdb.yandexcloud.net \
+    port=6432 \
+    sslmode=verify-full \
+    dbname=pgdb \
+    user=pguser \
+    target_session_attrs=read-write"
+Password for user pguser:
+psql (16.9 (Ubuntu 16.9-0ubuntu0.24.04.1), server 17.5 (Ubuntu 17.5-201-yandex.59510.7fea32f73d))
+pgdb=>
+pgdb=> SELECT current_database();
+ current_database
+------------------
+ pgdb
+(1 row)
+
+pgdb=> SELECT current_catalog;
+ current_catalog
+-----------------
+ pgdb
+(1 row)
+```
+Все прошло успешно!
 
 ## **(3) Сравнить характеристики: ##
 Стоимость в месяц (включая резервные копии)
@@ -25,6 +80,15 @@
 
 **Yandex Cloud**
 
+| Сущность | Yandex Cloud  | VK Cloud  |
+|---|---|---|
+|CPU   |2   |   |
+|RAM   |8Gb   | 0.01s  |
+|HDD   | 10Gb  | 2.3s  |
+|глубина хранения бэкапов  | 7 дней  | 0.04s  |
+|Стоимость в месяц   | 10 613  | 0.04s  |
+|pgbench latency   |  134.903 ms  | 0.04s  |
+
 Latency при выполнении запросов
 
 
@@ -32,15 +96,54 @@ Latency при выполнении запросов
 
 **Yandex Cloud**
 
+Выполняем pgbech со следующими аргументами: pgbench -c <num_clients> -T <time_limit_seconds> -h <remote_host> -p <remote_port> -U <username> <database_name>
+```
+esartison@otusmgt01:~$ pgbench -c 5 -T 300 -h rc1a-i97ee0q54nlm3sj0.mdb.yandexcloud.net -p 6432 -U pguser pgdb
+Password:
+pgbench (16.9 (Ubuntu 16.9-0ubuntu0.24.04.1), server 17.5 (Ubuntu 17.5-201-yandex.59510.7fea32f73d))
+starting vacuum...end.
+transaction type: <builtin: TPC-B (sort of)>
+scaling factor: 1
+query mode: simple
+number of clients: 5
+number of threads: 1
+maximum number of tries: 1
+duration: 300 s
+number of transactions actually processed: 11115
+number of failed transactions: 0 (0.000%)
+latency average = 134.903 ms
+initial connection time = 205.872 ms
+tps = 37.063703 (without initial connection time)
+```
+
+
+
 Удобство управления (интерфейс, документация)
 
 **VK Cloud**
 
+
 **Yandex Cloud**
+Понравилось что
+- диск может расширяться автоматически
+- Можно выбрать технологическое окно
+- возможность расширенных настроек
+- низкий порог входа
+
+Не Понравилось
+- настройка удаленного доступа требует сноровки и не все интуитивно понятно
+
+
 
 
 ## **(4) Документировать процесс: ##
 Какие облака выбрали и почему
+
+-- Выбрал **VK Cloud** и **Yandex Cloud** потому-что они являются лидерами на рынке, хотел понять приемущества обоих. 
+СберКлауд в тройку не входит. 
+
+
+
 
 
 ## **(5) С какими проблемами столкнулись (например, сложность настройки доступа) ##
