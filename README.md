@@ -75,7 +75,7 @@ pgdb=> SELECT current_catalog;
 Все прошло успешно!
 
 ## **(3) Сравнить характеристики: ##
-Стоимость в месяц (включая резервные копии)
+**- Стоимость в месяц (включая резервные копии)**
 
 **VK Cloud**
 
@@ -90,13 +90,14 @@ pgdb=> SELECT current_catalog;
 |Стоимость в месяц   | 10 613  | 0.04s  |
 |pgbench latency   |  134.903 ms  | 0.04s  |
 
-Latency при выполнении запросов
 
+
+**- Latency при выполнении запросов**
+Для проверки latency используем pgbench
 
 **VK Cloud**
 
 **Yandex Cloud**
-
 Выполняем pgbech со следующими аргументами: pgbench -c <num_clients> -T <time_limit_seconds> -h <remote_host> -p <remote_port> -U <username> <database_name>
 ```
 esartison@otusmgt01:~$ pgbench -c 5 -T 300 -h rc1a-i97ee0q54nlm3sj0.mdb.yandexcloud.net -p 6432 -U pguser pgdb
@@ -116,12 +117,12 @@ latency average = 134.903 ms
 initial connection time = 205.872 ms
 tps = 37.063703 (without initial connection time)
 ```
+latency average = 134.903 ms
 
 
 
 
-
-Удобство управления (интерфейс, документация)
+**- Удобство управления (интерфейс, документация)**
 
 **VK Cloud**
 
@@ -142,11 +143,10 @@ tps = 37.063703 (without initial connection time)
 ## **(4) Документировать процесс: ##
 Какие облака выбрали и почему
 
--- Выбрал **VK Cloud** и **Yandex Cloud** потому-что они являются лидерами на рынке, хотел понять приемущества обоих. 
+-- Выбрал **VK Cloud** и **Yandex Cloud** для тестирования потому-что они являются лидерами на рынке, хотел понять приемущества обоих. 
 СберКлауд в тройку не входит. 
 
-
-
+По итогам анализа, отдаю свое предпочтение 
 
 
 ## **(5) С какими проблемами столкнулись (например, сложность настройки доступа) ##
