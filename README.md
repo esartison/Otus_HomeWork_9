@@ -9,6 +9,7 @@
 
 **Yandex Cloud**
 выбрал 2 CPU, 8Gb RAM и HDD
+
 <img width="662" height="618" alt="image" src="https://github.com/user-attachments/assets/baa13d6a-d559-4dd1-8ecf-0a1d83a50c94" />
 
 
