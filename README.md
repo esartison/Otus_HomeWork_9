@@ -21,10 +21,13 @@
 
 **VK Cloud**
 
+
 **Yandex Cloud**
+
 Нужен доступ к базе данных с management ноды otusmgt01
 
 (a) Создал группу безопасности esartisonconn
+
 <img width="626" height="235" alt="image" src="https://github.com/user-attachments/assets/3a218054-b78e-4b1a-bde7-73070ac20094" />
 
 
