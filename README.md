@@ -136,6 +136,7 @@ latency average = 12.777 ms
 
 
 **Yandex Cloud**
+
 Выполняем pgbech со следующими аргументами: pgbench -c <num_clients> -T <time_limit_seconds> -h <remote_host> -p <remote_port> -U <username> <database_name>
 ```
 esartison@otusmgt01:~$ pgbench -c 5 -T 300 -h rc1a-i97ee0q54nlm3sj0.mdb.yandexcloud.net -p 6432 -U pguser pgdb
@@ -156,6 +157,7 @@ initial connection time = 205.872 ms
 tps = 37.063703 (without initial connection time)
 ```
 latency average = 134.903 ms
+
 
 
 
