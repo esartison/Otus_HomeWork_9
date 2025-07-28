@@ -101,11 +101,11 @@ pgdb=> SELECT current_catalog;
 |---|---|---|
 |кол-во узлов   |2   |2   |
 |CPU   |2   |   |
-|RAM   |8Gb   | 0.01s  |
+|RAM   |8Gb   | 8Gb  |
 |HDD   | 10Gb  | 10Gb  |
-|глубина хранения бэкапов  | 7 дней  | 0.04s  |
-|Стоимость в месяц   | 10 613  | 0.04s  |
-|pgbench latency   |  134.903 ms  | 0.04s  |
+|глубина хранения бэкапов  | 7 дней  | 7 дней  |
+|Стоимость в месяц   | 10 613  |  7 406  |
+|pgbench latency   |  134.903 ms  |12.777 ms  |
 
 
 
@@ -119,8 +119,21 @@ ubuntu@otusmgt01:~$ pgbench -c 5 -T 300 -h 10.0.0.249 -p 5432 -U esartison esart
 Password:
 pgbench (16.9 (Ubuntu 16.9-0ubuntu0.24.04.1))
 starting vacuum...end.
-```
 
+transaction type: <builtin: TPC-B (sort of)>
+scaling factor: 1
+query mode: simple
+number of clients: 5
+number of threads: 1
+maximum number of tries: 1
+duration: 300 s
+number of transactions actually processed: 117364
+number of failed transactions: 0 (0.000%)
+latency average = 12.777 ms
+initial connection time = 103.592 ms
+tps = 391.330508 (without initial connection time)
+```
+latency average = 12.777 ms
 
 
 
@@ -189,7 +202,9 @@ latency average = 134.903 ms
 Нашел пару статей, которые заслуживают некоторое доверие: [Мы протестировали разные облака в России на скорость PostgreSQL](https://habr.com/ru/companies/h3llo_cloud/articles/894914/) и 
 [Сравнение отечественных облачных сервисов](https://www.arsis.ru/blog/sravneniye-otechestvennykh-oblachnykh-servisov)
 
-По итогам анализа, отдаю свое предпочтение 
+При меньшей цене(~25%) VK показал лучшую на порядок latency. В VK нет HDD и используется SDD, в ЯО для удешевления выбрал HDD.
+
+По итогам анализа, отдаю свое предпочтение **VK Cloud**. На самом деле, очень много вводных и выбор провайдера нетривиальная задача. 
 
 
 ## **(5) С какими проблемами столкнулись (например, сложность настройки доступа) ##
