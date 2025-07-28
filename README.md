@@ -408,11 +408,3 @@ esartison@otusmgt01:~$
 Не хватило времени чтобы хорошо потестировать и описать. 
 
 Есть playbook для этих целей: https://ansible.readthedocs.io/projects/ansible/2.10/collections/community/general/postgresql_ping_module.html
-
-
-
-Формат сдачи:
-GitHub-репозиторий с:
-README.md (описание шагов, сравнение, выводы)
-Конфиги Terraform/Ansible (если делали бонус)
-Скриншоты работающих кластеров
