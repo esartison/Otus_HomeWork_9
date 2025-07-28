@@ -24,6 +24,7 @@
 Проверить подключение через psql
 
 **VK Cloud**
+
 Зашел с самой виртуальной машины в базу
 <img width="874" height="149" alt="image" src="https://github.com/user-attachments/assets/fdfb9ecc-2bfc-45d4-a6f6-2dfe7a8b1858" />
 
