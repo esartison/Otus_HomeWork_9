@@ -394,6 +394,7 @@ esartison@otusmgt01:~$
 ```
 
 Проверка
+
 <img width="633" height="474" alt="image" src="https://github.com/user-attachments/assets/c6904886-70a8-442e-a500-184b585e1641" />
 <img width="1101" height="125" alt="image" src="https://github.com/user-attachments/assets/06a28c7a-8aa3-4553-b743-f056191b37c6" />
 <img width="953" height="138" alt="image" src="https://github.com/user-attachments/assets/10a338b4-7c4f-4316-8149-e49024f55a75" />
