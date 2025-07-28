@@ -94,10 +94,6 @@ pgdb=> SELECT current_catalog;
 ## **(3) Сравнить характеристики: ##
 **- Стоимость в месяц (включая резервные копии)**
 
-**VK Cloud**
-
-**Yandex Cloud**
-
 | Сущность | Yandex Cloud  | VK Cloud  |
 |---|---|---|
 |кол-во узлов   |2   |2   |
@@ -114,6 +110,7 @@ pgdb=> SELECT current_catalog;
 Для проверки latency используем pgbench
 
 **VK Cloud**
+
 Выполняем pgbech со следующими аргументами: pgbench -c <num_clients> -T <time_limit_seconds> -h <remote_host> -p <remote_port> -U <username> <database_name>
 ```
 ubuntu@otusmgt01:~$ pgbench -c 5 -T 300 -h 10.0.0.249 -p 5432 -U esartison esartisondb
