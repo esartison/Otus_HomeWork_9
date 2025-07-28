@@ -113,6 +113,16 @@ pgdb=> SELECT current_catalog;
 Для проверки latency используем pgbench
 
 **VK Cloud**
+Выполняем pgbech со следующими аргументами: pgbench -c <num_clients> -T <time_limit_seconds> -h <remote_host> -p <remote_port> -U <username> <database_name>
+```
+ubuntu@otusmgt01:~$ pgbench -c 5 -T 300 -h 10.0.0.249 -p 5432 -U esartison esartisondb
+Password:
+pgbench (16.9 (Ubuntu 16.9-0ubuntu0.24.04.1))
+starting vacuum...end.
+```
+
+
+
 
 **Yandex Cloud**
 Выполняем pgbech со следующими аргументами: pgbench -c <num_clients> -T <time_limit_seconds> -h <remote_host> -p <remote_port> -U <username> <database_name>
@@ -185,8 +195,8 @@ latency average = 134.903 ms
 ## **(5) С какими проблемами столкнулись (например, сложность настройки доступа) ##
 Вывод: какое облако лучше подходит для BananaFlow?
 
-
 **VK Cloud**
+Нужна сноровка, не так все интуитивно понятно как в ЯO. 
 
 **Yandex Cloud**
 Все интуитивно понятно, в целом нареканий нет. Работать можно. 
